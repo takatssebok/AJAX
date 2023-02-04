@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data from DB</title>
+</head>
+
+<body>
+    <h1>The XMLHttpRequest object</h1>
+    <form action="">
+        <select name="customer" onchange="showCustomer(this.value)">
+            <option value="">Please select a customer</option>
+            <option value="PESM">Peter Smith</option>
+            <option value="MATW">Mark Twain</option>
+            <option value="LIKL">Linda Klein</option>
+        </select>
+
+        <br>
+
+        <div id="txtHint">Customer details will be listed here</div>
+    </form>
+
+    <script>
+        function showCustomer(str){
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("txtHint").innerHTML = this.responseText
+            }
+            xhttp.open("GET", "getcustomer.php?q="+str);
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>

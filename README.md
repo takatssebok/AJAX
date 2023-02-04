@@ -14,3 +14,7 @@ Request header information
 Request XML Files
 1. Load an XML file with AJAX
 2. Retrieve the content of an XML file
+
+Retrieve Server Data with PHP
+1. Retrieve the content of a PHP file
+
