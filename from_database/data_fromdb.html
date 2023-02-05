@@ -13,23 +13,28 @@
     <form action="">
         <select name="customer" onchange="showCustomer(this.value)">
             <option value="">Please select a customer</option>
-            <option value="PESM">Peter Smith</option>
-            <option value="MATW">Mark Twain</option>
-            <option value="LIKL">Linda Klein</option>
+            <option value="0">Peter Smith</option>
+            <option value="1">Mark Twain</option>
+            <option value="2">Linda Klein</option>
         </select>
 
-        <br>
+        <br><br>
 
         <div id="txtHint">Customer details will be listed here</div>
     </form>
 
     <script>
-        function showCustomer(str){
+        function showCustomer(str) {
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+
             const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
+            xhttp.onload = function () {
                 document.getElementById("txtHint").innerHTML = this.responseText
             }
-            xhttp.open("GET", "getcustomer.php?q="+str);
+            xhttp.open("GET", "getcustomer.php?q=" + str);
             xhttp.send();
         }
     </script>
