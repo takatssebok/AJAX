@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigate</title>
+</head>
+<body>
+    <div id="list"></div><br>
+    <input type="button" onclick="prev()" value="<<Previous">
+    <input type="button" onclick="next()" value="Next>>">
+
+    <script>
+        let i = 0;
+        let len;
+        let cd;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            const xmlDoc = xhttp.responseXML;
+            cd = xmlDoc.getElementsByTagName('CD');
+            len = cd.length;
+            display(i);
+        }
+        xhttp.open("GET", "cd_catalog.xml");
+        xhttp.send();
+
+        function display(i){
+            document.getElementById('list').innerHTML= 
+            "Artist: " + cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+            "<br>Title: " + cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+            "<br>Year: " + cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+        }
+
+        function prev(){
+            if(i>0){
+                i--;
+                display(i);
+            }
+        }
+
+        function next(){
+            if(i<len-1){
+                i++;
+                display(i);
+            }
+        }
+    </script>
+</body>
+</html>
